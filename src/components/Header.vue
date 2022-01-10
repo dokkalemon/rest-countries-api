@@ -1,5 +1,5 @@
 <template>
-    <header class="full-width">
+    <header class="full-width" >
         <div class="header container px-30">
             <h2>Where in the world?</h2>
             <button><i class="fas fa-sun"></i> Light Mode</button>
@@ -10,9 +10,7 @@
 <script>
 export default {
     name: 'Header',
-    components: {
-        
-    }
+
 }
 </script>
 
@@ -46,6 +44,17 @@ export default {
                     background-color: rgba(255, 255, 255, 0.036);
                 }
             }
+        }
+    }
+
+    .active {
+        background-color: $light-element;
+        h2 {
+            color: $light-text !important;
+        }
+
+        button {
+            color: $light-text !important;
         }
     }
 </style>

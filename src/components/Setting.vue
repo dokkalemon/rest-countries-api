@@ -27,8 +27,10 @@
 
 <script>
 export default {
-    name: 'Setting'
+    name: 'Setting',
+
 }
+
 </script>
 
 <style scoped lang="scss"> 
@@ -73,6 +75,25 @@ export default {
             padding: 15px;
             color: $dark-text;
             font-size: 14px;
+        }
+    }
+
+    .active {
+        .setting-container {
+            .setting-input {
+                background-color: $light-element;
+                i {
+                    color: $light-text;
+                }
+                input {
+                    color: $light-text;
+                }
+            }
+
+            select {
+                background-color: $light-element;
+                color: $light-text;
+            }
         }
     }
 </style>
