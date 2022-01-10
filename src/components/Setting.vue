@@ -61,6 +61,7 @@ export default {
                 outline: none;
                 color: $dark-text;
                 font-size: 14px;
+                width: 100%;height: 100%;
             }
         }
         select {
@@ -68,7 +69,8 @@ export default {
             width: 185px;
             background-color: $dark-element;
             border: none;
-            border-radius: 10px;padding: 10px;
+            border-radius: 10px;
+            padding: 15px;
             color: $dark-text;
             font-size: 14px;
         }
