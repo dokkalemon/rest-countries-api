@@ -4,7 +4,7 @@
 
             <div class="setting-input">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for a country...">
+                <input type="text" placeholder="Search for a country..." @keyup.enter="$emit('search', writeInput )" v-model="writeInput">
             </div>
 
             <select name="" id="">
@@ -29,6 +29,11 @@
 export default {
     name: 'Setting',
 
+    data() {
+        return {
+            writeInput: '',
+        }
+    }
 }
 
 </script>

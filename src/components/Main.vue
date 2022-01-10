@@ -1,7 +1,7 @@
 <template>
     <main class="full-width">
         <div class="main container px-30">
-            <Card v-for="(item, index) in country" :key="`state-${index}`"
+            <Card v-for="(item, index) in arrayCountry" :key="`state-${index}`"
             :name="item.name"
             :population="item.population"
             :region="item.region"
@@ -15,7 +15,7 @@
 
 <script>
 import Card from '@/components/Card.vue'
-import axios from 'axios';
+
 
 export default {
     name: 'Main',
@@ -23,26 +23,8 @@ export default {
         Card
     },
 
-    created() {
-        this.getCountry()
-    },
-
-    data() {
-        return {
-            country: [],
-        }
-    },
-
-    methods: {
-        getCountry() {
-            axios.get('https://restcountries.com/v2/all')
-            .then(result=>{
-                this.country = result.data;
-                console.log(this.country);
-            })
-
-        }
-
+    props: {
+        arrayCountry: Array
     }
 
 
