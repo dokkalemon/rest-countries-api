@@ -17,12 +17,6 @@
             </select>
         </div>
     </section>   
-
-
-
-
-
-
 </template>
 
 <script>
