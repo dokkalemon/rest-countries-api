@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <Header />
-    <Setting @search="prova"/>
+    <Setting @search="takeCountry"/>
     <Main :arrayCountry="filterCountry"/>
 
   </div>
@@ -29,6 +29,7 @@ export default {
         return {
             country: [],
             searchedCountry: '',
+            setContinent: '',
         }
     },
 
@@ -43,6 +44,8 @@ export default {
           return item.name.toLowerCase().includes(this.searchedCountry.toLowerCase())
         })
       }
+
+    
  
     },
 
@@ -51,14 +54,15 @@ export default {
             axios.get('https://restcountries.com/v2/all')
             .then(result=>{
                 this.country = result.data;
-                console.log(this.country);
             })
-
+            .catch(err=>{
+            console.log(err);
+          })
         },
 
-        prova(dato) {
+        takeCountry(dato) {
           this.searchedCountry = dato;
-        }
+        },
 
     }
 
