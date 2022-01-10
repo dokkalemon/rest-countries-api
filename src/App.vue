@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <i class="fas fa-user"></i>
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
