@@ -1,19 +1,21 @@
 <template>
   <div id="app">
     <Header />
-
-
+    <Setting />
+    
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
+import Setting from '@/components/Setting.vue'
 
 export default {
   name: 'App',
   components: {
-    Header
-    
+    Header,
+    Setting
+  
   }
 }
 </script>
