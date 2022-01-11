@@ -1,7 +1,13 @@
 <template>
     <main class="full-width">
         <div class="main container px-30">
-            <Card />
+            <Card v-for="(item, index) in countryArray" :key="`country-${index}`"
+            :name="item.name"
+            :flag="item.flag"
+            :population="item.population"
+            :region="item.region"
+            :capital="item.capital"
+            />
             
         </div>
     </main>
@@ -18,7 +24,7 @@ export default {
     },
 
     props: {
-        
+        countryArray: Array
     }
 
 

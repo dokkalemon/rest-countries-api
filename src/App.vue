@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="app">
-    <Header />
-    <Setting @search="takeCountry" @selectContinent="takeContinent"/>
-    <Main :arrayCountry="filterContinent"/>
+    <Header/>
+    <Setting @selectContinent="filterByContinent" @selectingCountry="userCountry"/>
+    <Main :countryArray="filterCountry"/>
 
   </div>
 </template>
@@ -11,7 +11,7 @@
 import Header from '@/components/Header.vue'
 import Setting from '@/components/Setting.vue'
 import Main from '@/components/Main.vue'
-/* import axios from 'axios' */
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -22,23 +22,67 @@ export default {
   },
 
     created() {
-        this.getCountry()
+        this.getCountry();
     },
 
     data() {
         return {
-            country: [],
-            searchedCountry: '',
-            setContinent: '',
+            allCountry: [],
+            selectCountry: [],
+            userCountrySelect: '',
         }
     },
 
-    computed: {},
+    computed: {
+      filterCountry() {
+        if (this.userCountrySelect === '') {
+          return this.selectCountry
+        }
 
+        return this.selectCountry.filter(item => {
+          return item.name.toLowerCase().includes(this.userCountrySelect.toLowerCase())
+        })
+
+      }
+
+
+    },
       
 
+    methods: {
+      //take a data from API
+      getCountry() {
+        axios.get('https://restcountries.com/v2/all')
+        .then(result=>{
+          this.allCountry = result.data;
 
-    methods: {},
+          for (let i = 0; i < this.allCountry.length; i++) {
+            this.selectCountry.push(this.allCountry[i])
+          }
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+      },
+
+
+      //Filter Country by Continent
+      filterByContinent(dato) {
+
+         this.selectCountry = [];
+        for (let i = 0; i < this.allCountry.length; i++) {
+          
+          if (this.allCountry[i].region.toLowerCase() === dato) {
+            this.selectCountry.push(this.allCountry[i])
+          }
+        } 
+      },
+
+      userCountry(dato){
+        this.userCountrySelect = dato;
+      }
+    },
+
 
 
 
@@ -56,7 +100,7 @@ export default {
 .app {
   min-height: 100vh;
   background-color: $dark-back;
-  border: 1px solid red;
+
 }
 
 .active {

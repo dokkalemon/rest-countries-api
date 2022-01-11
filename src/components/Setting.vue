@@ -4,13 +4,13 @@
 
             <div class="setting-input">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for a country...">
+                <input type="text" placeholder="Search for a country..." v-model="selectCountry" @keyup.enter="$emit('selectingCountry', selectCountry )">
             </div>
 
-            <select name="" id="">
-                <option selected hidden value="">Filter by Region</option>
+            <select name="" id="" v-model="filterContinent" @click.prevent="$emit('selectContinent', filterContinent)">
+                <option selected hidden value="" >Filter by Region</option>
                 <option value="africa">Africa</option>
-                <option value="america">America</option>
+                <option value="americas">Americas</option>
                 <option value="asia">Asia</option>
                 <option value="europe">Europe</option>
                 <option value="oceania">Oceania</option>
@@ -25,7 +25,8 @@ export default {
 
     data() {
         return {
-         
+            filterContinent: '',
+            selectCountry: '',
         }
     }
 }
