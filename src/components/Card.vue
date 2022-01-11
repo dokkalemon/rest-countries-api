@@ -1,5 +1,5 @@
 <template>
-    <section class="card ">
+    <section class="card" @click="$emit('activeState', true)">
         <div class="card-container">
             <div class="flag">
                 <img :src="flag" alt="">

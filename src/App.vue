@@ -3,6 +3,7 @@
     <Header/>
     <Setting @filteredContinent="takeFilterContinent" @filterCountry="inputCountry" />
     <Main :countryArray="filteringCountry"/>
+    <Warning v-show="filteringCountry.length === 0"/>
 
   </div>
 </template>
@@ -11,6 +12,7 @@
 import Header from '@/components/Header.vue'
 import Setting from '@/components/Setting.vue'
 import Main from '@/components/Main.vue'
+import Warning from '@/components/Warning.vue'
 import axios from 'axios'
 
 export default {
@@ -18,7 +20,8 @@ export default {
   components: {
     Header,
     Setting,
-    Main
+    Main,
+    Warning
   },
 
     created() {

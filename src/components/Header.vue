@@ -21,6 +21,8 @@ export default {
     header {
         background-color: $dark-element;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.413);
+        position: relative; 
+        z-index: 999;
         .header {
             height: 80px;
             display: flex;
