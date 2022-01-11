@@ -7,12 +7,12 @@
 
             <div class="info-country">
                 <div class="flag">
-                    <img src="https://flagcdn.com/td.svg" alt="">
+                    <img :src="flag" alt="">
                 </div>
 
                 <div class="text">
                     <div class="title">
-                        <h2>Belgium</h2>
+                        <h2>{{name}}</h2>
                     </div>
 
                     <div class="info-text">
@@ -29,25 +29,14 @@
                             <p>Languages: <span>Dutch, French, German</span></p>
                         </div>
                     </div>
-
                     <div class="countries-border">
                         <h4>Border Countries: </h4>
                         <button>France</button>
                         <button>Germany</button>
                         <button>Netherlands</button>
                     </div>
-
                 </div>
-
-
-
-
-
             </div>
-
-
-
-
         </div>
     </section>
 </template>
@@ -57,6 +46,8 @@ export default {
     name: 'CountryInfo',
     props: {
         activeState: Boolean,
+        name: String,
+        flag: String,
     }
 }
 </script>
@@ -148,6 +139,7 @@ export default {
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.139);
                         cursor: pointer;
                         transition: all 0.5s ease;
+                        color: $dark-text;
                         &:hover {
                             background-color: rgba(255, 255, 255, 0.139);
                         }

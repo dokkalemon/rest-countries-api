@@ -9,10 +9,9 @@
             :region="item.region"
             :capital="item.capital"
             @activeState="activeFunction"
-            
             />
 
-            <CountryInfo :activeState="active" @noActiveState="noActive"/>
+            <CountryInfo :activeState="active" @noActiveState="noActive" />
             
         </div>
     </main>
@@ -30,6 +29,9 @@ export default {
         CountryInfo
     },
 
+    created() {
+    },
+
     props: {
         countryArray: Array
     },
@@ -37,7 +39,7 @@ export default {
     data() {
         return {
             active: false,
-            proof: '',
+            selectedCountry: '',
         }
     },
 
@@ -48,7 +50,6 @@ export default {
 
         noActive(dato) {
             this.active = dato;
-            console.log(dato);
         }
     }
 
