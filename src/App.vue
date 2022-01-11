@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="app">
     <Header/>
-    <Setting/>
-    <Main :countryArray="allCountry"/>
+    <Setting @filteredContinent="takeFilterContinent" @filterCountry="inputCountry" />
+    <Main :countryArray="filteringCountry"/>
 
   </div>
 </template>
@@ -11,7 +11,7 @@
 import Header from '@/components/Header.vue'
 import Setting from '@/components/Setting.vue'
 import Main from '@/components/Main.vue'
-/* import axios from 'axios' */
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -23,33 +23,69 @@ export default {
 
     created() {
         this.getCountry();
+        
     },
 
     data() {
         return {
             allCountry: [],
+            continentFilter: '',
+            countryFilter: '',
             
         }
     },
 
     computed: {
-   
+        filteringContinent() {
+          if (this.continentFilter === '') {
+            return this.allCountry
+          }
+
+          return this.allCountry.filter( item => {
+            return item.region.toLowerCase().includes(this.continentFilter.toLowerCase())
+          })
+        },
+
+        filteringCountry() {
+          if (this.countryFilter === '') {
+            return this.filteringContinent
+          }
+
+          return this.filteringContinent.filter( item => {
+            return item.name.toLowerCase().includes(this.countryFilter.toLowerCase())
+          })
+
+        }
+
+
+
 
     },
       
 
     methods: {
-    
+
+      //take data from API
+      getCountry() {
+        axios.get('https://restcountries.com/v2/all')
+        .then(result=>{
+          this.allCountry = result.data;
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+      },
+
+      //take a filter for continent
+      takeFilterContinent(dato) {
+        this.continentFilter = dato;
+      },
 
 
-
-    
-
-
-
-
-
-
+      //take a user input country
+      inputCountry(dato) {
+        this.countryFilter = dato
+      }
 
     },
 
