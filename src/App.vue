@@ -34,6 +34,7 @@ export default {
     },
 
     computed: {
+      //filtered the country by the input
       filterCountry() {
         if (this.userCountrySelect === '') {
           return this.selectCountry
@@ -78,6 +79,7 @@ export default {
         } 
       },
 
+      //take info from input with emit
       userCountry(dato){
         this.userCountrySelect = dato;
       }
