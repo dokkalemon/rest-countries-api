@@ -7,33 +7,32 @@
 
             <div class="info-country">
                 <div class="flag">
-                    <img :src="flag" alt="">
+                    <img :src="selectedCountryObj.flag" alt="">
                 </div>
 
                 <div class="text">
                     <div class="title">
-                        <h2>{{name}}</h2>
+                        <h2>{{selectedCountryObj.name}}</h2>
                     </div>
 
                     <div class="info-text">
                         <div class="item-info">
-                            <p>Native Name: <span>Belgie</span></p>
-                            <p>Population: <span>11319511</span></p>
-                            <p>Region <span>Europe</span></p>
-                            <p>Sub Region: <span>Western Europe</span></p>
-                            <p>Capital: <span>Brussels</span></p>
+                            <p>Native Name: <span>{{selectedCountryObj.nativeName}}</span></p>
+                            <p>Population: <span>{{selectedCountryObj.population}}</span></p>
+                            <p>Region <span>{{selectedCountryObj.region}}</span></p>
+                            <p>Sub Region: <span>{{selectedCountryObj.subregion}}</span></p>
+                            <p>Capital: <span>{{selectedCountryObj.capital}}</span></p>
                         </div>
                         <div class="item-info">
-                            <p>Top Level Domain: <span>.be</span></p>
-                            <p>Currencies: <span>Euro</span></p>
-                            <p>Languages: <span>Dutch, French, German</span></p>
+                            <p>Top Level Domain: <span></span></p>
+                            <p>Currencies: <span></span></p>
+                            <p>Languages: <span></span></p>
                         </div>
                     </div>
                     <div class="countries-border">
                         <h4>Border Countries: </h4>
-                        <button>France</button>
-                        <button>Germany</button>
-                        <button>Netherlands</button>
+                        <button v-for="(item, index) in selectedCountryObj.borders" :key="`borders-${index}`">{{item}}</button>
+
                     </div>
                 </div>
             </div>
@@ -46,8 +45,7 @@ export default {
     name: 'CountryInfo',
     props: {
         activeState: Boolean,
-        name: String,
-        flag: String,
+        selectedCountryObj: Object
     }
 }
 </script>

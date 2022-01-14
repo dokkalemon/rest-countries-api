@@ -1,7 +1,7 @@
 <template>
   <section class="warning full-width">
 
-      <h2>Please, search another country,</h2>
+      <h2>Loading...</h2>
 
 
 

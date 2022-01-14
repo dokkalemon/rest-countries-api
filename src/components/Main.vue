@@ -11,7 +11,9 @@
             @activeState="activeFunction"
             />
 
-            <CountryInfo :activeState="active" @noActiveState="noActive" />
+            <CountryInfo v-show="selectedCountry.length = 1" :activeState="active" @noActiveState="noActive" class="country-info"
+            :selectedCountryObj="selectedCountry"
+            />
             
         </div>
     </main>
@@ -20,7 +22,7 @@
 <script>
 import Card from '@/components/Card.vue'
 import CountryInfo from '@/components/CountryInfo.vue'
-
+import axios from 'axios'
 
 export default {
     name: 'Main',
@@ -30,6 +32,7 @@ export default {
     },
 
     created() {
+       this.getCountry('italy')
     },
 
     props: {
@@ -39,21 +42,34 @@ export default {
     data() {
         return {
             active: false,
-            selectedCountry: '',
+            selectedCountry: {},
         }
     },
 
     methods: {
         activeFunction(dato) {
-            this.active = dato;
+            this.active = true;
+            this.getCountry(dato)
         },
 
-        noActive(dato) {
-            this.active = dato;
+        noActive() {
+            this.active = false;
+        },
+
+        getCountry(country) {
+            axios.get(`https://restcountries.com/v2/name/${country}`)
+            .then(result => {
+                this.selectedCountry = result.data[0];
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
         }
+
+
+
     }
-
-
 }
 
 
