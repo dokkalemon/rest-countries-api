@@ -60,7 +60,7 @@ export default {
         },
 
         getCountry(country) {
-                      for (let i = 0; i < this.countryArray.length; i++) {
+            for (let i = 0; i < this.countryArray.length; i++) {
                 if (country.toLowerCase().includes(this.countryArray[i].name.toLowerCase())) {
                     this.selectedCountry = this.countryArray[i]
 
