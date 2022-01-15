@@ -44,7 +44,8 @@ export default {
     name: 'CountryInfo',
     props: {
         activeState: Boolean,
-        selectedCountryObj: Object
+        selectedCountryObj: Object,
+        
     }
 }
 </script>

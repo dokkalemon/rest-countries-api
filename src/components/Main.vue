@@ -45,6 +45,8 @@ export default {
             active: false,
             selectedCountry: {},
             prova: [],
+            
+            
         }
     },
 
@@ -52,7 +54,6 @@ export default {
         activeFunction(dato) {
             this.active = true;
             this.getCountry(dato)
-
         },
 
         noActive() {
@@ -62,10 +63,9 @@ export default {
         getCountry(country) {
             for (let i = 0; i < this.countryArray.length; i++) {
                 if (country.toLowerCase().includes(this.countryArray[i].name.toLowerCase())) {
-                    this.selectedCountry = this.countryArray[i]
-
+                    this.selectedCountry = this.countryArray[i];
                 }  
-            }    
+            }
         },
     }
 }
