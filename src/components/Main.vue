@@ -9,9 +9,10 @@
             :region="item.region"
             :capital="item.capital"
             @activeState="activeFunction"
+            class="country-info"
             />
 
-            <CountryInfo v-show="selectedCountry.length = 1" :activeState="active" @noActiveState="noActive" class="country-info"
+            <CountryInfo v-show="selectedCountry.length = 1" :activeState="active" @noActiveState="noActive"
             :selectedCountryObj="selectedCountry"
             />
             
@@ -22,7 +23,7 @@
 <script>
 import Card from '@/components/Card.vue'
 import CountryInfo from '@/components/CountryInfo.vue'
-import axios from 'axios'
+/* import axios from 'axios' */
 
 export default {
     name: 'Main',
@@ -36,13 +37,14 @@ export default {
     },
 
     props: {
-        countryArray: Array
+        countryArray: Array,
     },
 
     data() {
         return {
             active: false,
             selectedCountry: {},
+            prova: [],
         }
     },
 
@@ -50,6 +52,7 @@ export default {
         activeFunction(dato) {
             this.active = true;
             this.getCountry(dato)
+
         },
 
         noActive() {
@@ -57,18 +60,13 @@ export default {
         },
 
         getCountry(country) {
-            axios.get(`https://restcountries.com/v2/name/${country}`)
-            .then(result => {
-                this.selectedCountry = result.data[0];
-            })
-            .catch(err => {
-                console.log(err);
-            })
+                      for (let i = 0; i < this.countryArray.length; i++) {
+                if (country.toLowerCase().includes(this.countryArray[i].name.toLowerCase())) {
+                    this.selectedCountry = this.countryArray[i]
 
-        }
-
-
-
+                }  
+            }    
+        },
     }
 }
 

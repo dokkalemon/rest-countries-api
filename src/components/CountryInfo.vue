@@ -24,15 +24,14 @@
                             <p>Capital: <span>{{selectedCountryObj.capital}}</span></p>
                         </div>
                         <div class="item-info">
-                            <p>Top Level Domain: <span></span></p>
-                            <p>Currencies: <span></span></p>
-                            <p>Languages: <span></span></p>
+                            <p>Top Level Domain: <span v-for="(item, index) in selectedCountryObj.topLevelDomain" :key="`domain-${index}`">{{item}}</span></p>
+                            <p>Currencies: <span v-for="(item, index) in selectedCountryObj.currencies" :key="`curr-${index}`">{{item.name}}</span></p>
+                            <p>Languages: <span v-for="(item, index) in selectedCountryObj.languages" :key="`lang-${index}`">{{item.name}} </span></p>
                         </div>
                     </div>
                     <div class="countries-border">
                         <h4>Border Countries: </h4>
                         <button v-for="(item, index) in selectedCountryObj.borders" :key="`borders-${index}`">{{item}}</button>
-
                     </div>
                 </div>
             </div>
