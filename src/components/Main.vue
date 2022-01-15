@@ -13,7 +13,7 @@
             />
 
             <CountryInfo v-show="selectedCountry.length = 1" :activeState="active" @noActiveState="noActive"
-            :selectedCountryObj="selectedCountry"
+            :selectedCountryObj="selectedCountry" :borderCountryArray="borderCountry"
             />
             
         </div>
@@ -44,7 +44,8 @@ export default {
         return {
             active: false,
             selectedCountry: {},
-            prova: [],
+            borderCountrySigle: [],
+            borderCountry: []
             
             
         }
@@ -64,6 +65,25 @@ export default {
             for (let i = 0; i < this.countryArray.length; i++) {
                 if (country.toLowerCase().includes(this.countryArray[i].name.toLowerCase())) {
                     this.selectedCountry = this.countryArray[i];
+
+                    if (this.countryArray[i].borders !== undefined) {
+                        this.borderCountrySigle = this.countryArray[i].borders
+                    } else {
+                        this.borderCountrySigle = []
+                    }
+
+                    this.borderCountry = [];
+
+                    for (let j = 0; j < this.borderCountrySigle.length; j++) {
+                        const sigle = this.borderCountrySigle[j]
+
+                        for (let y = 0; y < this.countryArray.length; y++) {
+                            if (sigle === this.countryArray[y].alpha3Code) {
+                                this.borderCountry.push(this.countryArray[y].name)
+                            }
+                        }
+
+                    }
                 }  
             }
         },

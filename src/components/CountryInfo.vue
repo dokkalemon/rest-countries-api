@@ -31,7 +31,9 @@
                     </div>
                     <div class="countries-border">
                         <h4>Border Countries: </h4>
-                        <button v-for="(item, index) in selectedCountryObj.borders" :key="`borders-${index}`">{{item}}</button>
+                        <div class="button">
+                            <button v-for="(item, index) in borderCountryArray" :key="`borders-${index}`">{{item}}</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -45,6 +47,7 @@ export default {
     props: {
         activeState: Boolean,
         selectedCountryObj: Object,
+        borderCountryArray: Array
         
     }
 }
@@ -98,6 +101,7 @@ export default {
             .text {
                 margin-left: 100px;
                 padding: 10px;
+                width: 600px;
                 .title {
                     h2 {
                         color: white;
@@ -121,26 +125,39 @@ export default {
                 }
                 .countries-border {
                     margin-top: 50px;
+                    width: 100%;
                     display: flex;
                     align-items: center;
+                    align-items: flex-start;
                     h4 {
                         color: white;
                         font-weight: 600;
                         font-weight: 14px;
+                        width: 190px;
                     }
-                    button {
-                        background-color: $dark-element;
-                        border: none;
-                        padding: 5px 15px;
-                        margin-left: 10px;
-                        margin-right: 10px;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.139);
-                        cursor: pointer;
-                        transition: all 0.5s ease;
-                        color: $dark-text;
-                        &:hover {
-                            background-color: rgba(255, 255, 255, 0.139);
-                        }
+                    
+                    .button {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        
+                            button {
+                            background-color: $dark-element;
+                            border: none;
+                            padding: 5px 15px;
+                            margin-left: 5px;
+                            margin-right: 5px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.139);
+                            cursor: pointer;
+                            transition: all 0.5s ease;
+                            color: $dark-text;
+                            margin-bottom: 5px;
+                            &:hover {
+                                background-color: rgba(255, 255, 255, 0.139);
+                            }
+                    }
                     }
                 }
             }
