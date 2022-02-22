@@ -1,5 +1,5 @@
 <template>
-    <main class="full-width">
+    <main class="full-width" :class="{light: color}">
         <div class="main container px-30">
             <Card 
             v-for="(item, index) in countryArray" :key="`country-${index}`"
@@ -8,12 +8,13 @@
             :population="item.population"
             :region="item.region"
             :capital="item.capital"
-            @activeState="activeFunction"
+            @activeState="activeFunctionCard"
             class="country-info"
             />
 
             <CountryInfo v-show="selectedCountry.length = 1" :activeState="active" @noActiveState="noActive"
             :selectedCountryObj="selectedCountry" :borderCountryArray="borderCountry"
+            @activeState="activeFunctionCountryInfo" :color="color"
             />
             
         </div>
@@ -23,7 +24,7 @@
 <script>
 import Card from '@/components/Card.vue'
 import CountryInfo from '@/components/CountryInfo.vue'
-/* import axios from 'axios' */
+
 
 export default {
     name: 'Main',
@@ -32,12 +33,10 @@ export default {
         CountryInfo
     },
 
-    created() {
-       this.getCountry('italy')
-    },
-
     props: {
         countryArray: Array,
+        allMainCountry: Array,
+        color: Boolean
     },
 
     data() {
@@ -52,41 +51,51 @@ export default {
     },
 
     methods: {
-        activeFunction(dato) {
+        activeFunctionCard(dato) {
             this.active = true;
-            this.getCountry(dato)
+            this.getCountry(dato, this.countryArray)
+        },
+
+        activeFunctionCountryInfo(dato) {
+            this.active = true;
+            this.getCountry(dato, this.allMainCountry)
         },
 
         noActive() {
             this.active = false;
         },
 
-        getCountry(country) {
-            for (let i = 0; i < this.countryArray.length; i++) {
-                if (country.toLowerCase().includes(this.countryArray[i].name.toLowerCase())) {
-                    this.selectedCountry = this.countryArray[i];
-
-                    if (this.countryArray[i].borders !== undefined) {
-                        this.borderCountrySigle = this.countryArray[i].borders
-                    } else {
-                        this.borderCountrySigle = []
-                    }
-
+        //select a country from array
+        getCountry(country, array) {
+            for (let i = 0; i < array.length; i++) {
+                if (country.toLowerCase().includes(array[i].name.toLowerCase())) {
+                    this.selectedCountry = array[i];
                     this.borderCountry = [];
-
-                    for (let j = 0; j < this.borderCountrySigle.length; j++) {
-                        const sigle = this.borderCountrySigle[j]
-
-                        for (let y = 0; y < this.countryArray.length; y++) {
-                            if (sigle === this.countryArray[y].alpha3Code) {
-                                this.borderCountry.push(this.countryArray[y].name)
-                            }
-                        }
-
-                    }
-                }  
+                    this.getBorders(i, array)
+                }
             }
         },
+
+        //add country borders in a variable
+        getBorders(state, array) {
+                if (array[state].borders !== undefined) {
+                    this.borderCountrySigle = array[state].borders;
+                    this.transformBorders()
+                } else {
+                    this.borderCountrySigle = undefined;
+                }
+        },
+
+        //trasform alpha3Code to Country Name
+        transformBorders() {
+            for (let i = 0; i < this.borderCountrySigle.length; i++) {
+                for (let j = 0; j < this.allMainCountry.length; j++) {
+                    if (this.borderCountrySigle[i] === this.allMainCountry[j].alpha3Code) {
+                        this.borderCountry.push(this.allMainCountry[j].name)
+                    }
+                }
+            }            
+        }
     }
 }
 
@@ -103,8 +112,23 @@ export default {
 .main {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: flex-start;
 }
+
+.light {
+    background-color: $light-back;
+}
+
+@media screen and (max-width: 375px) {
+    .main {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+}
+
+
 
 
 </style>

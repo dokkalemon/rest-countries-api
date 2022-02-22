@@ -1,10 +1,9 @@
 <template>
-    <section class="card" @click="$emit('activeState', name)">
+    <section class="card" @click="$emit('activeState', name)" :class="{light: color}">
         <div class="card-container">
             <div class="flag">
                 <img :src="flag" alt="">
             </div>
-
             <div class="info">
                 <div class="name">
                     <h4>{{name}}</h4>
@@ -28,6 +27,7 @@ export default {
         population: Number,
         region: String,
         capital: String,
+        color: Boolean,
     }
 }
 </script>
@@ -79,8 +79,40 @@ export default {
     }
 }
 
+.light {
+    .card-container {
+        background-color: $light-back;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.146);
+        .info {
+            .name {
+                h4 {color: $light-text;}
+            }
+            .other {
+                p {color: $light-text}
+                span {color: $light-text}
+            }
+        }
+    }
+}
 
 
+@media screen and (max-width: 375px) {
+    .card {
+        width: 100%;
+        height: 410px;
+        .card-container {
+        cursor: pointer;
+        background-color: $dark-element;
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+        .flag {
+            height: 220px;
+        }
+    }
+}
+}
 
 
 </style>

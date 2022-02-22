@@ -1,12 +1,10 @@
 <template>
-     <section class="setting full-width">
+     <section class="setting full-width" :class="{light: color}">
         <div class="setting-container container px-30">
-
             <div class="setting-input">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for a country..." v-model="userCountry" @keyup.enter="$emit('filterCountry', userCountry)">
+                <input type="text" placeholder="Search for a country..." v-model="userCountry" @keyup="$emit('filterCountry', userCountry)">
             </div>
-
             <select name="" id="" v-model="filterContinent" @click="$emit('filteredContinent', filterContinent)">
                 <option selected hidden value="" >Filter by Region</option>
                 <option value="africa">Africa</option>
@@ -22,6 +20,9 @@
 <script>
 export default {
     name: 'Setting',
+    props: {
+        color: Boolean,
+    },
 
     data() {
         return {
@@ -38,14 +39,14 @@ export default {
 @import '../styles/var.scss';
 
     .setting-container {
-        height: 55px;
         margin-top: 45px;
         margin-bottom: 45px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding-top: 80px;
         .setting-input {
-            height: 100%;
+            height: 55px;
             width: 450px;
             border-radius: 10px;
             background-color: $dark-element;
@@ -67,7 +68,7 @@ export default {
             }
         }
         select {
-            height: 100%;
+            height: 55px;
             width: 185px;
             background-color: $dark-element;
             border: none;
@@ -96,4 +97,37 @@ export default {
             }
         }
     }
+
+.light {
+    background-color: $light-back;
+
+    .setting-input {
+        background-color: $light-back;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.146);
+        i {
+            color: $light-text;
+        }
+        input {
+            color: $light-text;
+        }
+
+    }
+        select {
+            background-color: $light-back;
+            color: $light-text;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.146);
+        }
+}
+
+    @media screen and (max-width: 375px) {
+    .setting-container {
+        flex-direction: column;
+        align-items: flex-start;
+        .setting-input {
+            margin-bottom: 50px;
+            width: 100%;
+        }
+        
+    }
+}
 </style>

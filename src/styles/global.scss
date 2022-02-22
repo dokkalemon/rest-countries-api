@@ -34,3 +34,13 @@ body {
 .debug{
     border: 1px solid red;
 }
+
+
+@media screen and (max-width: 375px) {
+    .container {
+        width: 100%;
+    }
+
+    
+    
+}

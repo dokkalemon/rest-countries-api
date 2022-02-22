@@ -1,9 +1,9 @@
 <template>
-  <div id="app" class="app">
-    <Header/>
-    <Setting @filteredContinent="takeFilterContinent" @filterCountry="inputCountry" />
-    <Main :countryArray="filteringCountry"/>
-    <Warning v-show="filteringCountry.length === 0"/>
+  <div id="app" class="app" :class="{light: lightMode}">
+    <Header @colorChange="changeColor" :color="lightMode"/>
+    <Setting @filteredContinent="takeFilterContinent" @filterCountry="inputCountry" :color="lightMode" />
+    <Main :countryArray="filteringCountry" :allMainCountry="allCountry" :color="lightMode"/>
+    <Warning v-show="filteringCountry.length === 0" :color="lightMode"/>
 
   </div>
 </template>
@@ -34,6 +34,7 @@ export default {
             allCountry: [],
             continentFilter: '',
             countryFilter: '',
+            lightMode: false,
             
         }
     },
@@ -73,6 +74,7 @@ export default {
         axios.get('https://restcountries.com/v2/all')
         .then(result=>{
           this.allCountry = result.data;
+
         })
         .catch(err=>{
           console.log(err);
@@ -88,6 +90,15 @@ export default {
       //take a user input country
       inputCountry(dato) {
         this.countryFilter = dato
+      },
+
+      //Change Color
+      changeColor() {
+        if (this.lightMode === false) {
+          this.lightMode = true
+        } else {
+          this.lightMode = false
+        }
       }
 
 
@@ -115,6 +126,10 @@ export default {
   min-height: 100vh;
   background-color: $dark-back;
 
+}
+
+.light {
+  background-color: $light-back
 }
 
 .active {
